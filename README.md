@@ -51,3 +51,7 @@ Här krävs en riktig server och mer avancerad frontend.
 
 * **Framework only:** Ingen `.innerHTML` eller `document.createElement`. All DOM-manipulation måste ske via Angular ("The Angular Way").
 * **NPM:** Var restriktiv med externa paket. Oscar (ledningen) gillar inte onödiga beroenden, så varje paket måste motiveras.
+
+
+Färg till bakgrundsbild vid no files:
+#A0A4A8 - bör funka till både ljust och mörkt tema
