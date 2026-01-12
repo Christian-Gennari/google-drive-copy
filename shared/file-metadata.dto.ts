@@ -5,6 +5,7 @@ export interface FileMetadataDto {
   ownerName: string;
   location: string; // Could be the folder path
   filename: string;
+  filePath: string; // Full path including filename
   uploadedAt: string; // String not Date because JSON converts Dates to strings anyways
   sizeInBytes: number;
 }
