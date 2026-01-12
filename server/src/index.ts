@@ -64,6 +64,31 @@ app.get("/api/files/:id", async (req: Request, res: Response) => {
   res.status(200).json(file);
 });
 
+app.put("/api/files/:filename", async (req: Request, res: Response) => {
+    const {filename} = req.params;
+
+    if (!filename) {
+        return res.status(400).json({error: "No filename provided"})
+    }
+
+    if (filename.includes("/") || filename.includes("\\")) {
+        return res.status(400).json({error: "Folders are not allowed"});
+    }
+
+    const fullPath = path.join(UPLOADS_DIR, filename);
+
+    try {
+        await fs.promises.writeFile(fullPath, req.body);
+
+        res.status(200).json({
+            message: "File saved",
+            filename,
+            size: req.body.length
+        });
+    } catch {
+        res.status(500).json({error: "Failed to save file"});
+    }
+});
 app.delete("/api/files/:id", async (req: Request, res: Response) => {
   const fileId = Number(req.params.id);
   const files = await DbService.getAllFiles();
