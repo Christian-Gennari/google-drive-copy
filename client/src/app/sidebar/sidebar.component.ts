@@ -13,12 +13,7 @@ import { NavButtonComponent } from '../components/nav-button/nav-button.componen
     </nav>
     <hr />
     <p>0 av 15 GB används</p>
-    <app-nav-button
-      label="Få mer lagringsutrymme"
-      icon="storage"
-      variant="secondary"
-      cssClass="get-storage"
-    />
+    <app-nav-button label="Få mer lagringsutrymme" variant="secondary" cssClass="get-storage" />
   `,
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -63,11 +63,12 @@
 :host([data-variant='secondary']) {
   button {
     margin: 0 auto;
-    border: 2px solid rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.3);
     width: 90%;
-    padding: 0.5rem 1.5rem;
-    border-radius: 1rem;
-    padding: 0.5rem 0.5rem;
+    color: #3582e0;
+    border-radius: 2rem;
+    padding: 0.7rem 0rem;
     font-weight: 500;
   }
 }
