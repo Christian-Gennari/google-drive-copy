@@ -1,63 +1,61 @@
 :host {
-    background-color: rgb(236, 241, 243);
-    grid-area: sidebar;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+  background-color: rgb(236, 241, 243);
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 nav {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: hidden;
 
-    button {
-        border-radius: 8px;
-        background-color: rgb(212, 237, 236);
-        border: none;
-        font-size: 14px;
-        cursor: pointer;
-        padding: 12px 16px;
-        text-align: left;
+  button {
+    border-radius: 8px;
+    background-color: rgb(212, 237, 236);
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 12px 16px;
+    text-align: left;
 
-
-      svg {
-        width: 1rem;
-        height: 1rem;
-        stroke: currentColor;
-        fill: none;
-        stroke-width: 1.5;
-      }
-
-
-      &:hover {
-            cursor: pointer;
-        }
+    svg {
+      width: 1rem;
+      height: 1rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
     }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 hr {
-    width: 80%;
-    border-top: 2px solid grey;
+  width: 80%;
+  border-top: 2px solid grey;
 }
 
 p {
-    margin: 0;
-    padding: 12px 16px;
-    font-size: 12px;
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 12px;
 }
 
 .get-storage {
-    margin: 10px 16px;
-    padding: 12px 16px;
-    background-color: rgb(212, 237, 236);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
+  margin: 10px 16px;
+  padding: 12px 16px;
+  background-color: rgb(212, 237, 236);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
 
-    &:hover {
-        cursor: pointer;
-    }
+  &:hover {
+    cursor: pointer;
+  }
 }
