@@ -1,0 +1,29 @@
+:host > * {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+:host {
+    background-color: rgb(241, 235, 235);
+    gap: 10px;
+    grid-area: header;
+}
+
+.brand-logo {
+    height: 50px;
+    width: 50px;
+}
+
+.brand-name {
+
+    h1 {
+        font-size: 2em;
+    }
+
+    .search {
+        width: 70%;
+    }
+}
+
+/* Ensure each direct child of the header host is a flex row item */
