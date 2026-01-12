@@ -1,0 +1,16 @@
+.app-layout {
+    display: grid;
+    grid-template-columns: 10% 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        "header header"
+        "sidebar main";
+    height: 100vh;
+}
+
+.main {
+    background-color: antiquewhite;
+    grid-area: main;
+    padding: 1rem;
+    overflow: auto;
+}
