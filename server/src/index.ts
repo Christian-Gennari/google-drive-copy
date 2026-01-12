@@ -18,6 +18,11 @@ app.use(
     origin: "http://localhost:4200",
   })
 );
+app.use("/api/files",
+    express.raw({
+        type: "*/*",
+        limit: "10mb"
+    }))
 app.use(express.json());
 
 if(!fs.existsSync(UPLOADS_DIR)){
