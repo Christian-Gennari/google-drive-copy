@@ -10,6 +10,10 @@ import { HeaderComponent } from './header/header.component';
     <div class="app-layout">
       <app-header></app-header>
       <app-sidebar></app-sidebar>
+
+      <main class="main">
+        <router-outlet></router-outlet>
+      </main>
     </div>
   `,
   styleUrls: ['./app.scss']
