@@ -11,6 +11,7 @@ const PORT = process.env.PORT || 4000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const UPLOADS_DIR = path.resolve(process.cwd(), "uploads");
 
 app.use(
   cors({
@@ -18,6 +19,10 @@ app.use(
   })
 );
 app.use(express.json());
+
+if(!fs.existsSync(UPLOADS_DIR)){
+    fs.mkdirSync(UPLOADS_DIR);
+}
 
 app.get("/api/health", (req: Request, res: Response) => {
   res.json({
