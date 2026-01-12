@@ -5,25 +5,24 @@
 }
 
 :host {
-    background-color: rgb(241, 235, 235);
-    gap: 10px;
-    grid-area: header;
+  background-color: #f8fafd;
+  gap: 10px;
+  grid-area: header;
 }
 
 .brand-logo {
-    height: 50px;
-    width: 50px;
+  height: 50px;
+  width: 50px;
 }
 
 .brand-name {
+  h1 {
+    font-size: 2em;
+  }
 
-    h1 {
-        font-size: 2em;
-    }
-
-    .search {
-        width: 70%;
-    }
+  .search {
+    width: 70%;
+  }
 }
 
 /* Ensure each direct child of the header host is a flex row item */
