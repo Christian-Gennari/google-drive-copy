@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "ownerName": "Alice",
+    "location": "/documents/reports",
+    "filename": "report1.pdf",
+    "filePath": "/uploads/report1.pdf",
+    "uploadedAt": "2024-06-15T10:30:00Z",
+    "sizeInBytes": 204800
+  },
+  {
+    "id": 2,
+    "ownerName": "Bob",
+    "location": "/pictures/vacation",
+    "filename": "beach.png",
+    "filePath": "/uploads/",
+    "uploadedAt": "2024-06-16T14:45:00Z",
+    "sizeInBytes": 512000
+  }
+]

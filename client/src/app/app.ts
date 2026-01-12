@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
+import type { FileMetadataDto } from '../../../shared/file-metadata.dto';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,23 @@ import { HeaderComponent } from './header/header.component';
       </main>
     </div>
   `,
-  styleUrls: ['./app.scss']
+  styleUrls: ['./app.scss'],
 })
 export class App {
-  protected readonly title = signal('client');
+  /*
+  constructor() {
+    this.logMessage();
+  }
+  
+  async getAllFiles(): Promise<FileMetadataDto[]> {
+    const data = await fetch('/api/files');
+    console.log('App component initialized');
+    return data.json() as Promise<FileMetadataDto[]>;
+  }
+
+  async logMessage(): Promise<void> {
+    const resultat = await this.getAllFiles();
+    console.log('Fetched files:', resultat);
+  }
+    */
 }
