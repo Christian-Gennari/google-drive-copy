@@ -24,4 +24,9 @@ export class DbService {
     const file = files.find((f) => f.id === id);
     return file;
   }
+
+  static async UpdateListOfFiles(list : JSON[]): Promise<void> {
+    const newList = JSON.stringify(list, null, 4);
+    await fs.promises.writeFile(this.filePath, newList, 'utf-8');
+  }
 }
