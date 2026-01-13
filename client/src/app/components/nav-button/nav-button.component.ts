@@ -19,7 +19,7 @@ import { IconsComponent } from '../icons/icons.component';
   },
 })
 export class NavButtonComponent {
-  label = input.required<string>();
+  label = input<string>();
   icon = input<string>('');
   cssClass = input<string>('');
   variant = input<'default' | 'primary' | 'secondary'>('default');
