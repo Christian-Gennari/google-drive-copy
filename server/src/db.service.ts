@@ -32,10 +32,17 @@ export class DbService {
 
   static async upsertFile(fileData: any): Promise<void> {
     const files = await this.getAllFiles() || [];
-    const existingFileIndex = files.findIndex(f => f.filePath === fileData.filePath);
+    const existingFileIndex = files.findIndex(f => f.fileName === fileData.fileName);
 
     if (existingFileIndex !== -1) {
-      files[existingFileIndex] = fileData;
+      files[existingFileIndex] = {
+        fileName: fileData.fileName,
+        ownerName: fileData.ownerName,
+        uploadedAt: files[existingFileIndex].uploadedAt,
+        editedAt: fileData.editedAt,
+        sizeInBytes: fileData.sizeInBytes,
+        body: fileData.fileBody
+      }
     } else {
       files.push(fileData);
     }

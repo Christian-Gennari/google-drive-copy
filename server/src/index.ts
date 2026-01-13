@@ -82,6 +82,15 @@ app.put("/api/files/:filename", async (req: Request, res: Response) => {
     try {
         await fs.promises.writeFile(fullPath, req.body);
 
+        await DbService.upsertFile({
+            fileName: filename,
+            ownerName: req.body.ownerName,
+            uploadedAt: new Date().toISOString(),
+            editedAt: new Date().toISOString(),
+            sizeInBytes: req.body.length,
+            fileBody: req.body
+        });
+
         res.status(200).json({
             message: "File saved",
             filename,
