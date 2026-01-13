@@ -8,10 +8,8 @@ import {IconsComponent} from '../icons/icons.component';
   template: `
     <div class="searchbar">
   <span class="searchbar__icon" aria-hidden="true">
-    <!-- Replace with your icons component for magnifier -->
     <app-icon [name]="'search'"></app-icon>
   </span>
-
       <input
         class="searchbar__input"
         type="search"
