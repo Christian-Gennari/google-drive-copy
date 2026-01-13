@@ -8,15 +8,15 @@ import { FileuploadComponent } from '../components/fileupload/fileupload.compone
   imports: [NavButtonComponent, FileuploadComponent],
   template: `
     <nav>
-      <app-nav-button label="Nytt" icon="plus" variant="primary" cssClass="new-button" />
+      <app-nav-button label="Nytt" icon="plus" variant="primary" class="new-button" />
       <app-fileupload></app-fileupload>
       @for (item of navItems; track item.label) {
-      <app-nav-button [label]="item.label" [icon]="item.icon" [cssClass]="item.cssClass" />
+      <app-nav-button [label]="item.label" [icon]="item.icon" [class]="item.class" />
       }
     </nav>
     <hr />
     <p>0 av 15 GB används</p>
-    <app-nav-button label="Få mer lagringsutrymme" variant="secondary" cssClass="get-storage" />
+    <app-nav-button label="Få mer lagringsutrymme" variant="secondary" class="get-storage" />
   `,
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -26,15 +26,15 @@ export class SidebarComponent {
   fileHandlingService = inject(FileHandlingService);
   
   protected readonly navItems = [
-    { label: 'Startsida', cssClass: 'home-page', icon: 'home' },
-    { label: 'Min enhet', cssClass: 'my-unit', icon: 'my-unit' },
-    { label: 'Datorer', cssClass: 'computers', icon: 'computer' },
-    { label: 'Delas med mig', cssClass: 'shared-with-me', icon: 'shared-with-me' },
-    { label: 'Senaste', cssClass: 'latest', icon: 'latest' },
-    { label: 'Stjärnmärkt', cssClass: 'marked', icon: 'marked' },
-    { label: 'Skräppost', cssClass: 'trash', icon: 'trash' },
-    { label: 'Papperskorg', cssClass: 'bin', icon: 'bin' },
-    { label: 'Lagring', cssClass: 'storage', icon: 'storage' },
+    { label: 'Startsida', class: 'home-page', icon: 'home' },
+    { label: 'Min enhet', class: 'my-unit', icon: 'my-unit' },
+    { label: 'Datorer', class: 'computers', icon: 'computer' },
+    { label: 'Delas med mig', class: 'shared-with-me', icon: 'shared-with-me' },
+    { label: 'Senaste', class: 'latest', icon: 'latest' },
+    { label: 'Stjärnmärkt', class: 'marked', icon: 'marked' },
+    { label: 'Skräppost', class: 'trash', icon: 'trash' },
+    { label: 'Papperskorg', class: 'bin', icon: 'bin' },
+    { label: 'Lagring', class: 'storage', icon: 'storage' },
   ];
 
   /* constructor () {

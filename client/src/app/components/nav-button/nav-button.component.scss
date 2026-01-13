@@ -1,5 +1,7 @@
 :host {
   display: block;
+  gap: 5px;
+  overflow-y: hidden;
 
   button {
     display: flex;
@@ -71,4 +73,12 @@
     padding: 0.7rem 0rem;
     font-weight: 500;
   }
+}
+
+:host(.my-unit) {
+  margin-bottom: 1em;
+}
+
+:host(.marked) {
+  margin-bottom: 1em;
 }
