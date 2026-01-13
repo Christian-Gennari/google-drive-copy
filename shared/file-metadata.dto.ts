@@ -1,11 +1,11 @@
-export interface FileMetadataDto {
+export interface FileDto {
+  filename: string; // Just the filename
   // We should use the relative path or filename as the ID if possible,
   // as the assignment uses paths in the URL (api/files/*).
-  id: number;
   ownerName: string; // Name of the user who uploaded the file
-  location: string; // Could be the folder path
-  filename: string; // Just the filename
-  filePath: string; // Full path including filename
   uploadedAt: string; // String not Date because JSON converts Dates to strings anyways
+  editedAt: string; //  First value is derived by uploadedAt
   sizeInBytes: number; // Size of the file
+
+  fileBody: string; // Base64 encoded file content
 }

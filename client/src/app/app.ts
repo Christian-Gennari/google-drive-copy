@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
-import type { FileMetadataDto } from '../../../shared/file-metadata.dto';
+import type { FileDto } from '../../../shared/file-metadata.dto';
 
 @Component({
   selector: 'app-root',
@@ -25,10 +25,10 @@ export class App {
     this.logMessage();
   }
   
-  async getAllFiles(): Promise<FileMetadataDto[]> {
+  async getAllFiles(): Promise<FileDto[]> {
     const data = await fetch('/api/files');
     console.log('App component initialized');
-    return data.json() as Promise<FileMetadataDto[]>;
+    return data.json() as Promise<FileDto[]>;
   }
 
   async logMessage(): Promise<void> {
