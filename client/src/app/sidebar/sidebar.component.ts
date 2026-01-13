@@ -1,12 +1,15 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { NavButtonComponent } from '../components/nav-button/nav-button.component';
+import { FileHandlingService } from '../services/file-handling.service';
+import { FileuploadComponent } from '../components/fileupload/fileupload.component';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NavButtonComponent],
+  imports: [NavButtonComponent, FileuploadComponent],
   template: `
     <nav>
       <app-nav-button label="Nytt" icon="plus" variant="primary" cssClass="new-button" />
+      <app-fileupload></app-fileupload>
       @for (item of navItems; track item.label) {
       <app-nav-button [label]="item.label" [icon]="item.icon" [cssClass]="item.cssClass" />
       }
@@ -19,6 +22,9 @@ import { NavButtonComponent } from '../components/nav-button/nav-button.componen
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
+  
+  fileHandlingService = inject(FileHandlingService);
+  
   protected readonly navItems = [
     { label: 'Startsida', cssClass: 'home-page', icon: 'home' },
     { label: 'Min enhet', cssClass: 'my-unit', icon: 'my-unit' },
@@ -30,4 +36,13 @@ export class SidebarComponent {
     { label: 'Papperskorg', cssClass: 'bin', icon: 'bin' },
     { label: 'Lagring', cssClass: 'storage', icon: 'storage' },
   ];
+
+  /* constructor () {
+    this.fileHandlingService.convertToBase64();
+  };
+
+  convertToBase64() {
+    reader = new FileReader( )
+    this.fileHandlingService.convertToBase64()
+  }; */
 }
