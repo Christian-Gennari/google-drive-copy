@@ -1,5 +1,5 @@
 export interface FileDto {
-  filename: string; // Just the filename
+  fileName: string; // Just the filename
   // We should use the relative path or filename as the ID if possible,
   // as the assignment uses paths in the URL (api/files/*).
   ownerName: string; // Name of the user who uploaded the file
