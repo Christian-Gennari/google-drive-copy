@@ -8,7 +8,7 @@ import { NavButtonComponent } from '../components/nav-button/nav-button.componen
   <aside>
     <nav>
       @for (item of asideItems; track item.label) {
-      <app-nav-button [label]="item.label" [icon]="item.icon" [cssClass]="item.cssClass" />
+      <app-nav-button [icon]="item.icon" [cssClass]="item.cssClass" />
       }
     </nav>
   <aside>
@@ -21,6 +21,6 @@ export class AsideComponent {
     { label: 'Keep', cssClass: 'keep', icon: 'keep' },
     { label: 'Tasks', cssClass: 'tasks', icon: 'task' },
     { label: 'Kontakter', cssClass: 'contacts', icon: 'contacts' },
-    { label: 'Hämta tillägg', cssClass: 'get-add-ons', icon: 'add-on' },
+    { label: 'Hämta tillägg', cssClass: 'get-add-ons', icon: 'plus' },
   ];
 }
