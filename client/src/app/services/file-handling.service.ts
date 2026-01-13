@@ -1,5 +1,5 @@
-import { Injectable, signal } from '@angular/core';
-import { FileDto } from '../../../../shared/file-metadata.dto.js';
+import {Injectable, signal} from '@angular/core';
+import { FileDto} from '../../../../shared/file-metadata.dto';
 
 @Injectable({
   providedIn: 'root',

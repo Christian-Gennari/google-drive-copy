@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { FileHandlingService } from '../../services/file-handling.service';
+import {Component, inject} from '@angular/core';
+import {FileHandlingService} from '../../services/file-handling.service';
 
 @Component({
   selector: 'app-fileupload',
