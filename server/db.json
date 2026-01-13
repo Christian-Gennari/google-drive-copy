@@ -1,18 +1,26 @@
 [
-  {
-    "fileName": "report1.pdf",
-    "ownerName": "Alice",
-    "uploadedAt": "2024-06-15T10:30:00Z",
-    "editedAt": "2024-06-15T10:30:00Z",
-    "sizeInBytes": 204800,
-    "fileBody": "2npi3yn23pyinpin13ypin13ypi1n3ypi13nypi1n3yyn13ypin13y"
-  },
-  {
-    "fileName": "beach.png",
-    "ownerName": "Bob",
-    "uploadedAt": "2024-06-16T14:45:00Z",
-    "editedAt": "2026-12-05T06:50:00Z",
-    "sizeInBytes": 512000,
-    "fileBody": "nv+q9n4v+9q43nv9+4vtn+9t932vtyn7293vt723"
-  }
+    {
+        "fileName": "report1.pdf",
+        "ownerName": "Alice",
+        "uploadedAt": "2024-06-15T10:30:00Z",
+        "editedAt": "2024-06-15T10:30:00Z",
+        "sizeInBytes": 204800,
+        "fileBody": "2npi3yn23pyinpin13ypin13ypi1n3ypi13nypi1n3yyn13ypin13y"
+    },
+    {
+        "fileName": "beach.png",
+        "ownerName": "Bob",
+        "uploadedAt": "2024-06-16T14:45:00Z",
+        "editedAt": "2026-12-05T06:50:00Z",
+        "sizeInBytes": 512000,
+        "fileBody": "nv+q9n4v+9q43nv9+4vtn+9t932vtyn7293vt723"
+    },
+    {
+        "fileName": "test1.txt",
+        "ownerName": "Alice",
+        "uploadedAt": "2026-01-13T09:54:02.118Z",
+        "editedAt": "2026-01-13T09:54:42.642Z",
+        "sizeInBytes": 5,
+        "body": "aGVsbG8="
+    }
 ]
