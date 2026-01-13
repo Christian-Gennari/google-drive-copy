@@ -1,28 +1,46 @@
-:host > * {
+:host > header {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+
 }
 
 :host {
+  align-content: space-around;
   background-color: #f8fafd;
-  gap: 10px;
   grid-area: header;
 }
 
-.brand-logo {
-  height: 50px;
-  width: 50px;
+.brand{
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 0.5rem;
+  width: 234px;
+  flex: 0 0 234px;
+  padding-left: 1rem;
+  .brand-logo {
+    height: 3rem;
+    width: 3rem;
+  }
+  h1{
+    font-family: Cygre, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 1.75em;
+    margin: 0;
+    line-height: 1;
+    font-weight: 400;
+    color: #505050;
+    align-self: center;
+    user-select: none;
+  }
 }
 
-.brand-name {
-  h1 {
-    font-size: 2em;
-  }
-
-  .search {
-    width: 70%;
-  }
+.header-search {
+  flex: 1 1 auto;
+  min-width: 0;
 }
+
 
 /* Ensure each direct child of the header host is a flex row item */

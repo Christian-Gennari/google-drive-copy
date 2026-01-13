@@ -1,7 +1,6 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-// 1. IMPORT THE DTO
 import type { FileDto } from "../../shared/file-metadata.dto.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -18,7 +17,6 @@ export class DbService {
       }
       return JSON.parse(data);
     } catch (error) {
-      // Return null if file doesn't exist or is corrupt
       return null;
     }
   }
@@ -37,7 +35,6 @@ export class DbService {
     await fs.promises.writeFile(this.filePath, newList, "utf-8");
   }
 
-  // 2. USE FileDto INSTEAD OF ANY
   static async upsertFile(fileData: FileDto): Promise<void> {
     const files = (await this.getAllFiles()) || [];
     const existingFileIndex = files.findIndex(
@@ -51,7 +48,6 @@ export class DbService {
         uploadedAt: files[existingFileIndex].uploadedAt,
         editedAt: fileData.editedAt,
         sizeInBytes: fileData.sizeInBytes,
-        // 3. FIX: Use 'fileBody' to match the DTO and the insert logic
         fileBody: fileData.fileBody,
       };
     } else {
