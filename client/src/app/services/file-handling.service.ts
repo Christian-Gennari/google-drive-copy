@@ -84,6 +84,18 @@ export class FileHandlingService {
     return filesData;
   }
 
+  downloadFile(filename: string): void {
+    const url = `/api/files/${filename}`;
+
+    // Create a temporary anchor element to trigger download (browser-compatible, ugly but works)
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
   // GET for SEARCH-results
   async searchAllFiles(query: string): Promise<FileDto[]> {
@@ -91,7 +103,7 @@ export class FileHandlingService {
       return this.fetchAllFiles();
     }
 
-    const response = await fetch (`/api/search?q=${encodeURIComponent(query)}`, {
+    const response = await fetch(`/api/search?q=${encodeURIComponent(query)}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -106,6 +118,5 @@ export class FileHandlingService {
     const results = (await response.json()) as FileDto[];
     this.filesList.set(results);
     return results;
-  };
-
+  }
 }
