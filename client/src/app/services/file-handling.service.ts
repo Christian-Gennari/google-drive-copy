@@ -88,14 +88,14 @@ export class FileHandlingService {
     const url = `/api/files/${filename}`;
 
     // Create a temporary anchor element to trigger download (browser-compatible, ugly but works)
-    const link = document.createElement('a');
+    const link = document.createElement('a'); // This createElement use is approved by Oscar!
     link.href = url;
     link.download = filename;
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }
+  };
 
   // GET for SEARCH-results
   async searchAllFiles(query: string): Promise<FileDto[]> {
