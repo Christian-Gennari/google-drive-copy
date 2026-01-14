@@ -13,21 +13,21 @@
     background: transparent;
     cursor: pointer;
     font-size: 0.875rem;
-    color: inherit;
+    color: var(--color-text-brand);
     text-align: left;
     border-radius: 0.25rem;
     transition: background-color 0.15s ease;
 
     &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
+      background-color: var(--color-hover-overlay);
     }
 
     &:active {
-      background-color: #c2e6fe;
+      background-color: var(--color-primary-press);
     }
 
     &:focus-visible {
-      outline: 2px solid #1a73e8;
+      outline: 2px solid var(--color-outline);
       outline-offset: -2px;
     }
 
@@ -48,23 +48,23 @@
 // Primary variant - for "Nytt" button
 :host([data-variant='primary']) {
   button {
-    margin: 10px 0px 10px 15px;
+    margin: 10px 0 10px 15px;
     width: 45%;
     padding: 0.8rem 1rem;
-    background-color: #fff;
+    background-color: var(--color-btn-new-bg);
     border-radius: 0.8rem;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-elev-1);
 
     font-weight: 500;
 
     &:hover {
-      background-color: #f8f9fa;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+      background-color: var(--color-surface-hover);
+      box-shadow: var(--shadow-elev-1-hover);
     }
 
     &:active {
-      background-color: #c2e6fe;
-      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+      background-color: var(--color-primary-press);
+      box-shadow: var(--shadow-elev-1);
     }
   }
 }
@@ -74,11 +74,11 @@
   button {
     margin: 0 auto;
     text-align: center;
-    border: 1px solid rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--color-border-strong);
     width: 90%;
-    color: #3582e0;
+    color: var(--color-link);
     border-radius: 2rem;
-    padding: 0.7rem 0rem;
+    padding: 0.7rem 0;
     font-weight: 500;
   }
 }
