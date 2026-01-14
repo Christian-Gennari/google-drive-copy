@@ -83,4 +83,29 @@ export class FileHandlingService {
     console.log('Fetched files:', filesData);
     return filesData;
   }
+
+
+  // GET for SEARCH-results
+  async searchAllFiles(query: string): Promise<FileDto[]> {
+    if (!query || query.trim().length === 0) {
+      return this.fetchAllFiles();
+    }
+
+    const response = await fetch (`/api/search?q=${encodeURIComponent(query)}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      return [];
+      //TODO: lägga in en länk till den "tomma" sidan?
+    }
+
+    const results = (await response.json()) as FileDto[];
+    this.filesList.set(results);
+    return results;
+  };
+
 }
