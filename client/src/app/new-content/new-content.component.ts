@@ -1,4 +1,4 @@
-import { Component, inject, input } from '@angular/core';
+import { Component, EventEmitter, inject, input, output } from '@angular/core';
 import { FileHandlingService } from '../services/file-handling.service';
 
 @Component({
@@ -16,6 +16,7 @@ export class NewContentComponent {
   FileService = inject(FileHandlingService);
 
   open = input<boolean>(false);
+  close = output<void>();
 
   onSelectChange(event: Event) {
     const select = event.target as HTMLSelectElement;
@@ -25,17 +26,27 @@ export class NewContentComponent {
       const input = document.createElement('input'); // This createElement use is approved by Oscar!
       input.type = 'file';
       input.style.display = 'none';
+
+      input.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement;
+        if (!target.files || target.files.length === 0) {
+          alert('Fil kunde inte laddas upp');
+          return;
+        }
+
+        const fileToReturn: File = target.files[0];
+        this.FileService.onFileSelected(fileToReturn);
+        document.body.removeChild(input);
+
+        // Close the dropdown after file selection
+        this.close.emit();
+      });
+
       document.body.appendChild(input);
       input.click();
-      document.body.removeChild(input);
 
-      if (!input.files || input.files.length === 0) {
-        alert('Fil kunde inte laddas upp');
-        return;
-      }
-
-      const fileToReturn: File = input.files[0];
-      this.FileService.onFileSelected(fileToReturn);
+      // Reset select to default
+      select.value = '';
     }
   }
 }

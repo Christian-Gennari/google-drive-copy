@@ -16,7 +16,7 @@ import { NewContentComponent } from '../new-content/new-content.component';
         (click)="onNewButtonClick()"
       />
 
-      <app-new-content [open]="dropdownOpen()"></app-new-content>
+      <app-new-content [open]="dropdownOpen()" (close)="dropdownOpen.set(false)"></app-new-content>
       @for (item of navItems; track item.label) {
       <app-nav-button [label]="item.label" [icon]="item.icon" [class]="item.class" />
       }
