@@ -5,7 +5,7 @@ import { FileHandlingService } from '../services/file-handling.service';
   selector: 'app-new-content',
   imports: [],
   template: ` <div>
-    <select name="new-content" class="new-content" (change)="onSelectChange($event.target.value)">
+    <select name="new-content" class="new-content" (change)="onSelectChange($event)">
       <option value="folder">Ladda upp ny mapp</option>
       <option value="file">Ladda upp ny fil</option>
     </select>
