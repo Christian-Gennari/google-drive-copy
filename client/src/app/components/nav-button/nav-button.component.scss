@@ -35,6 +35,14 @@
       flex: 1;
     }
   }
+
+  .computers {
+    margin-bottom: 1em;
+  }
+
+  .marked {
+    margin-bottom: 1em;
+  }
 }
 
 // Primary variant - for "Nytt" button
@@ -73,12 +81,4 @@
     padding: 0.7rem 0rem;
     font-weight: 500;
   }
-}
-
-:host(.computers) {
-  margin-bottom: 1em;
-}
-
-:host(.marked) {
-  margin-bottom: 1em;
 }
