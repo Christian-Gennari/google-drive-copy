@@ -65,7 +65,7 @@ app.get("/api/files/:filename", (req: Request, res: Response) => {
   res.status(200).sendFile(fullPath);
 });
 
-// PUT: Upload or update a file
+// PUT: Upload or replace a file
 app.put("/api/files/:filename", async (req: Request, res: Response) => {
   const { filename } = req.params;
   const fileDto: FileDto = req.body;
@@ -120,7 +120,7 @@ app.put("/api/files/:filename", async (req: Request, res: Response) => {
   }
 });
 
-// Changed from :id to :filename to match the rest of our logic
+// DELETE: Delete a file by filename
 app.delete("/api/files/:filename", async (req: Request, res: Response) => {
   const filename = req.params.filename;
   const files = await DbService.getAllFiles();
@@ -151,7 +151,7 @@ app.delete("/api/files/:filename", async (req: Request, res: Response) => {
   res.status(200).json(files);
 });
 
-//Endpoint for search-bar:
+//GET: Endpoint for search-bar functionality
 app.get("/api/search", async (req: Request, res: Response) => {
   const query = req.query.q as string;
 
