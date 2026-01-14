@@ -5,7 +5,7 @@ import { IconsComponent } from '../icons/icons.component';
   selector: 'app-nav-button',
   imports: [IconsComponent],
   template: `
-    <button [class]="cssClass()" (click)="clicked.emit()">
+    <button [class]="class()" (click)="clicked.emit()">
       @if (icon()) {
       <app-icon [name]="icon()" />
       }
@@ -21,7 +21,7 @@ import { IconsComponent } from '../icons/icons.component';
 export class NavButtonComponent {
   label = input<string>();
   icon = input<string>('');
-  cssClass = input<string>('');
+  class = input<string>('');
   variant = input<'default' | 'primary' | 'secondary'>('default');
   clicked = output<void>();
 }
