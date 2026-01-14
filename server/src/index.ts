@@ -32,7 +32,7 @@ app.get("/api/health", (req: Request, res: Response) => {
   });
 });
 
-// GET: Get list of file metadata
+// GET: Get list of file objects
 app.get("/api/files", async (req: Request, res: Response) => {
   const files = await DbService.getAllFiles();
   // Return empty array if no files found, which is safer for frontend
@@ -42,7 +42,7 @@ app.get("/api/files", async (req: Request, res: Response) => {
   res.status(200).json(files);
 });
 
-// GET: Get specific file metadata by filename
+// GET: Get specific file object by filename
 app.get("/api/files/:filename", (req: Request, res: Response) => {
   const { filename } = req.params;
 

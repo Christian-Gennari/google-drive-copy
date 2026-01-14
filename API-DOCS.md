@@ -64,7 +64,7 @@ The server uses a centralized configuration file located at `server/src/config.t
 ## **3. Data Transfer Object (DTO)**
 
 **Type:** `FileDto`
-The JSON structure used for file metadata.
+The JSON structure used for file sending.
 
 | Field | Type | Required? | Description |
 | --- | --- | --- | --- |
@@ -97,7 +97,7 @@ Primary endpoint for saving files. Handles both creation and updates.
 3. **Decode:** Converts `fileBody` (Base64) to Binary.
 4. **Save:**
 * **Disk:** Saves binary to `uploads/vacation.jpg`.
-* **DB:** Saves metadata to `db.json`.
+* **DB:** Saves file to `db.json`.
 
 
 
@@ -114,7 +114,7 @@ Primary endpoint for saving files. Handles both creation and updates.
 
 ### **B. List All Files (GET)**
 
-Retrieves metadata for all stored files.
+Retrieves metadata + file in base64 for all stored files.
 
 * **Endpoint:** `/files`
 * **Method:** `GET`
