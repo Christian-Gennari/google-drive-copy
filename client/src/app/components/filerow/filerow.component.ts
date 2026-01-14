@@ -24,6 +24,9 @@ import { FileHandlingService } from '../../services/file-handling.service';
       <button class="action-button" (click)="onDownloadClick()">
         <app-icon [name]="'download'"></app-icon>
       </button>
+      <button class="action-button" (click)="onDeleteClick()">
+        <app-icon [name]="'bin'"></app-icon>
+      </button>
     </article>
   `,
   styleUrl: './filerow.component.scss',
@@ -40,5 +43,9 @@ export class FilerowComponent {
 
   onDownloadClick() {
     this.fileService.downloadFile(this.fileName());
+  }
+
+  protected async onDeleteClick() {
+    await this.fileService.deleteFile(this.fileName());
   }
 }

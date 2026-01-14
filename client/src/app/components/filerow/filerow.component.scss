@@ -1,6 +1,6 @@
 .file-row {
   display: grid;
-  grid-template-columns: 1fr 200px 150px 150px 100px 48px;
+  grid-template-columns: 1fr 200px 150px 150px 100px 48px 48px;
   gap: 16px;
   align-items: center;
   padding: 8px 16px;
@@ -8,6 +8,7 @@
   transition: background-color 0.2s ease;
   cursor: pointer;
   min-height: 48px;
+  flex-wrap: nowrap;
 
   &:hover {
     background-color: var(--color-surface-2);
@@ -26,6 +27,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      color: var(--color-text-muted);
 
       svg {
         width: 24px;
@@ -72,11 +74,12 @@
     font-size: 20px;
     color: var(--color-text-muted);
     transition: background-color 0.2s ease;
-    opacity: 0;
+    opacity: 75%;
     flex-shrink: 0;
+    margin-left: 6px;
 
     &:hover {
-      background-color: var(--color-surface-hover);
+      background-color: var(--color-border-hover);
     }
   }
 
@@ -88,8 +91,7 @@
 // Responsive adjustments
 @media (max-width: 1024px) {
   .file-row {
-    grid-template-columns: 1fr 150px 120px 80px 48px;
-
+    grid-template-columns: 1fr 150px 120px 80px 80px;
     .file-date:last-of-type {
       display: none;
     }
@@ -98,8 +100,7 @@
 
 @media (max-width: 768px) {
   .file-row {
-    grid-template-columns: 1fr 100px 48px;
-
+    grid-template-columns: 1fr 100px 80px;
     .file-owner,
     .file-date,
     .file-size {

@@ -127,4 +127,24 @@ export class FileHandlingService {
     this.filesList.set(results);
     return results;
   }
+
+  // DELETE: file by filename
+  async deleteFile(filename: string): Promise<boolean> {
+    const response = await fetch(`/api/files/${encodeURIComponent(filename)}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      // Update the local signal by filtering out the deleted file
+      this.filesList.update((files) =>
+        files.filter((f) => f.fileName !== filename)
+      );
+      return true;
+    }
+
+    return false;
+  }
 }
