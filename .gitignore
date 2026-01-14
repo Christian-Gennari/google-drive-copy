@@ -1,3 +1,10 @@
 
 # node_modules
 node_modules/
+
+dist/
+
+shared/file-metadata.dto.d.ts
+shared/file-metadata.dto.d.ts.map
+shared/file-metadata.dto.js
+shared/file-metadata.dto.js.map
