@@ -15,17 +15,6 @@ import { FileHandlingService } from '../services/file-handling.service';
 export class NewContentComponent {
   FileService = inject(FileHandlingService);
 
-  /*
-  1. vi hämtar att det är en "fil" från select
-  2. vi skapar en input som inte syns och där vi kan ladda upp filen från datorn
-  3. vi sparar filen här, lokalt
-  (4. vi skickar filen till service som uppdaterar selectedFile)
-  5. anropa (härifrån) att vi vill ladda upp filen 
-   */
-
-
-  private newFile = File; 
-
   onSelectChange(event: Event) {
     const select = event.target as HTMLSelectElement;
     const value = select.value;
