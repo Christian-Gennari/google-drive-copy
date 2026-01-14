@@ -1,8 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
 
-// Remove default margin and padding
-/* Register fonts from public/assets/fonts */
+:root {
+  /* Surfaces */
+  --color-surface-app: #f8fafd;
+  --color-surface-1: #ffffff;
+  --color-surface-2: #f1f3f4;
+  --color-surface-hover: #eef1f3;
 
+  /* Text */
+  --color-text: #202124;
+  --color-text-muted: #5f6368;
+  --color-text-brand: #505050;
+
+  /* Borders / outlines / shadows */
+  --color-border-subtle: rgba(0, 0, 0, 0.08);
+  --color-border-hover: rgba(0, 0, 0, 0.14);
+  --color-outline: #1a73e8;
+  --color-outline-soft: rgba(26, 115, 232, 0.35);
+  --shadow-focus: 0 1px 2px rgba(0, 0, 0, 0.08), 0 0 0 3px rgba(26, 115, 232, 0.20);
+  --shadow-elev-1: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-elev-1-hover: 0px 1px 3px rgba(0, 0, 0, 0.4);
+
+  /* Brand / actions */
+  --color-primary: #1a73e8;
+  --color-primary-press: #c2e6fe;
+  --color-link: #3582e0;
+
+  /* Buttons / chips */
+  --color-chip: rgb(212, 237, 236);
+  --color-hover-overlay: rgba(0, 0, 0, 0.05);
+  --color-border-strong: rgba(0, 0, 0, 0.3);
+}
+
+/* Register fonts from public/assets/fonts */
 /* The IDE complains to path
    This fails because asset URLs in Angular CSS are resolved by the build pipeline,
    not by pointing at your repo path. Use the runtime asset path (from assets/)
@@ -24,7 +54,8 @@
   font-display: swap;
 }
 
-/* Global default font */
+/* Global default font
+   Remove default margin and padding */
 html,
 body {
   font-family: NunitoSans, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
