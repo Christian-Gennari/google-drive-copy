@@ -1,6 +1,6 @@
 .file-row {
   display: grid;
-  grid-template-columns: 1fr 200px 150px 150px 100px 48px 48px;
+  grid-template-columns: 1fr 10rem 8rem 8rem 5rem 48px 48px;
   gap: 16px;
   align-items: center;
   padding: 8px 16px;
@@ -91,20 +91,28 @@
 // Responsive adjustments
 @media (max-width: 1024px) {
   .file-row {
-    grid-template-columns: 1fr 150px 120px 80px 80px;
-    .file-date:last-of-type {
+    grid-template-columns: 1fr 5rem 5rem 4rem 32px 32px;
+    gap: 0.7rem;
+    .file-date {
+
+    }
+    #uploadedAt {
       display: none;
     }
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 870px) {
   .file-row {
-    grid-template-columns: 1fr 100px 80px;
+    grid-template-columns: 1fr 32px 32px;
     .file-owner,
     .file-date,
     .file-size {
       display: none;
+    }
+
+    .action-button {
+      margin-left: 0;
     }
 
     .file-info .file-details .file-name {

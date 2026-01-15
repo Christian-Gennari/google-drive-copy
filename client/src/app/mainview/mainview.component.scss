@@ -4,10 +4,11 @@
   max-width: 100%;
   overflow-x: auto;
   border-radius: 1rem;
+  height: 95%;
 
   .file-list-header {
     display: grid;
-    grid-template-columns: 1fr 200px 150px 150px 100px 48px 48px;
+    grid-template-columns: 1fr 10rem 8rem 8rem 5rem 48px 48px;
     gap: 16px;
     align-items: center;
     padding: 8px 16px;
@@ -63,30 +64,40 @@
 
 // Responsive adjustments
 @media (max-width: 1024px) {
-  .mainview .file-list-header {
-    grid-template-columns: 1fr 150px 120px 80px 48px;
+  :host {
+    .mainview {
+      padding: 1rem;
 
-    .header-date:last-of-type {
-      display: none;
+      .file-list-header {
+        grid-template-columns: 1fr 5rem 5rem 4rem 32px 32px;
+        gap: 0.7rem;
+      }
+
+      #headerUploadedAt {
+        display: none;
+      }
     }
   }
 }
 
-@media (max-width: 768px) {
-  .mainview {
-    padding: 16px 12px;
+@media (max-width: 870px) {
+  :host {
+    .mainview {
 
-    .file-list-header {
-      grid-template-columns: 1fr 100px 48px;
+      padding: 16px 12px;
 
-      .header-owner,
-      .header-date,
-      .header-size {
-        display: none;
-      }
+      .file-list-header {
+        grid-template-columns: 1fr;
 
-      .header-name {
-        padding-left: 36px;
+        .header-owner,
+        .header-date,
+        .header-size {
+          display: none;
+        }
+
+        .header-name {
+          padding-left: 36px;
+        }
       }
     }
   }
