@@ -87,3 +87,19 @@
     font-weight: 500;
   }
 }
+
+
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 768px) {
+    :host {
+      button {
+        padding: 0.5rem;
+      }
+      .google-apps {
+        display: none;
+      }
+    }
+}

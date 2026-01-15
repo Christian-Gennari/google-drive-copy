@@ -20,3 +20,14 @@ nav {
 .spacer {
   flex: 0 0 auto;
 }
+
+// Responsive adjustments
+@media (max-width: 1024px) {
+
+}
+
+@media (max-width: 768px) {
+  :host{
+    display: none;
+  }
+}
