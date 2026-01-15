@@ -5,13 +5,19 @@ import { NavButtonComponent } from '../components/nav-button/nav-button.componen
   selector: 'app-aside',
   imports: [NavButtonComponent],
   template: `
-  <aside>
-    <nav>
-      @for (item of asideItems; track item.label) {
-      <app-nav-button [icon]="item.icon" [class]="item.class" />
-      }
-    </nav>
-  <aside>
+    <aside>
+      <nav>
+        @for (item of asideItems; track item.label) {
+        <app-nav-button
+          [icon]="item.icon"
+          [label]="item.label"
+          [class]="item.class"
+          [showLabelText]="false"
+        />
+        }
+      </nav>
+      <div class="spacer"></div>
+    </aside>
   `,
   styleUrls: ['./aside.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

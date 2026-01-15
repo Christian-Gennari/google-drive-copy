@@ -8,8 +8,9 @@ import { IconsComponent } from '../icons/icons.component';
     <button [class]="class()" (click)="clicked.emit()">
       @if (icon()) {
       <app-icon [name]="icon()" />
-      }
+      } @if (showLabelText()) {
       <span class="label">{{ label() }}</span>
+      }
     </button>
   `,
   styleUrl: './nav-button.component.scss',
@@ -22,6 +23,7 @@ export class NavButtonComponent {
   label = input<string>();
   icon = input<string>('');
   class = input<string>('');
+  showLabelText = input<boolean>(true);
   variant = input<'default' | 'primary' | 'secondary'>('default');
   clicked = output<void>();
 }
