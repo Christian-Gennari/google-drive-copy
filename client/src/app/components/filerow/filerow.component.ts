@@ -2,16 +2,17 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { IconsComponent } from '../icons/icons.component';
 import { DatePipe } from '@angular/common';
 import { FileSizePipe } from '../../pipes/file-size.pipe';
+import { FileIconPipe } from '../../pipes/file-icon.pipe';
 import { FileHandlingService } from '../../services/file-handling.service';
 
 @Component({
   selector: 'app-filerow',
-  imports: [IconsComponent, DatePipe, FileSizePipe],
+  imports: [IconsComponent, DatePipe, FileSizePipe, FileIconPipe],
   template: `
     <article class="file-row">
       <div class="file-info">
         <div class="file-icon">
-          <app-icon [name]="'document'"></app-icon>
+          <app-icon [name]="fileName() | fileIcon"></app-icon>
         </div>
         <div class="file-details">
           <span class="file-name">{{ fileName() }}</span>

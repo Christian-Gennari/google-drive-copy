@@ -21,6 +21,7 @@
     min-width: 0; // Allow text truncation
 
     .file-icon {
+      line-height: 0;
       flex-shrink: 0;
       width: 24px;
       height: 24px;
