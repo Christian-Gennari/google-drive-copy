@@ -11,7 +11,6 @@ export const CONFIG = {
   paths: {
     // Go up one level from server (..), then into client -> dist -> client -> browser
     angularDist: path.resolve(SERVER_ROOT, "../client/dist/client/browser"),
-
     // Uploads are located directly in the server folder
     uploads: path.resolve(SERVER_ROOT, "uploads"),
   },

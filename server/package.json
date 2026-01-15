@@ -2,13 +2,13 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "dist/server/src/index.js",
   "type": "module",
   "scripts": {
     "build": "tsc",
     "build:client": "cd ../client && npm install && npm run build",
     "prestart": "npm run build && npm run build:client",
-    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "start": "cross-env NODE_ENV=production node dist/server/src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
