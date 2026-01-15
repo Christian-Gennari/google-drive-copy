@@ -8,8 +8,8 @@
     "build": "tsc",
     "build:client": "cd ../client && npm install && npm run build",
     "prestart": "npm run build && npm run build:client",
-    "start": "cross-env NODE_ENV=production node dist/server/src/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon --exec node --loader ts-node/esm src/index.ts",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
