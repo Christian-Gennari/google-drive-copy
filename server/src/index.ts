@@ -190,7 +190,7 @@ app.get("/api/search", async (req: Request, res: Response) => {
     threshold,
   });
 
-  const matches = results.map((r) => r.obj);
+  const matches = results.map((r) => r.obj.fileName);
 
   res.status(200).json(matches);
 });
