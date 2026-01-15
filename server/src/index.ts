@@ -39,7 +39,7 @@ app.get("/api/health", (req: Request, res: Response) => {
   });
 });
 
-// GET: Get list of file objects
+// GET: Get list of file objects (metadata only)
 app.get("/api/files", async (req: Request, res: Response) => {
   const files = await DbService.getAllFiles();
   
@@ -57,7 +57,7 @@ app.get("/api/files", async (req: Request, res: Response) => {
   res.status(200).json(sanitizedFiles);
 });
 
-// GET: Get specific file object by filename
+// GET: Get specific file object by filename (includes fileBody)
 app.get("/api/files/:filename", (req: Request, res: Response) => {
   const { filename } = req.params;
 
