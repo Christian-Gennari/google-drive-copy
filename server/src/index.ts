@@ -42,11 +42,19 @@ app.get("/api/health", (req: Request, res: Response) => {
 // GET: Get list of file objects
 app.get("/api/files", async (req: Request, res: Response) => {
   const files = await DbService.getAllFiles();
-  // Return empty array if no files found, which is safer for frontend
+  
   if (!files) {
     return res.status(200).json([]);
   }
-  res.status(200).json(files);
+
+  // OPTIMIZATION: Map over files and remove 'fileBody'
+  // This reduces the response size from MBs to KBs
+  const sanitizedFiles = files.map((file: FileDto) => {
+    const { fileBody, ...metadata } = file;
+    return metadata;
+  });
+
+  res.status(200).json(sanitizedFiles);
 });
 
 // GET: Get specific file object by filename
