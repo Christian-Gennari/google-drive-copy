@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { FileDto } from '../../../../shared/file.dto';
 
 @Injectable({
@@ -9,18 +9,18 @@ export class FileHandlingService {
   selectedFile = signal<File | null>(null);
   filesList = signal<FileDto[]>([]);
 
+  usedStorageInBytes = computed(() => {
+    return this.filesList()
+      .map((file) => file.sizeInBytes)
+      .reduce((totalBytes: number, currentFileSize) => totalBytes + (currentFileSize ?? 0), 0);
+  });
+
+  // Handles file selection from an input element
   onFileSelected(file: File) {
     this.selectedFile.set(file);
     this.uploadFile(file).then((r) => console.log(r));
     console.log(file);
   }
-  
-  /* onFileSelected(event: any) {
-    const file = event.target.files[0];
-    this.selectedFile.set(file);
-    this.uploadFile(file).then((r) => console.log(r));
-    console.log(file);
-  } */
 
   // ========================
   // CONVERSION METHODS
@@ -144,9 +144,7 @@ export class FileHandlingService {
 
     if (response.ok) {
       // Update the local signal by filtering out the deleted file
-      this.filesList.update((files) =>
-        files.filter((f) => f.fileName !== filename)
-      );
+      this.filesList.update((files) => files.filter((f) => f.fileName !== filename));
       return true;
     }
 

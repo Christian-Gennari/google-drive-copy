@@ -2,10 +2,11 @@ import { Component, ChangeDetectionStrategy, inject, signal } from '@angular/cor
 import { NavButtonComponent } from '../components/nav-button/nav-button.component';
 import { FileHandlingService } from '../services/file-handling.service';
 import { NewContentComponent } from '../new-content/new-content.component';
+import { FileSizePipe } from '../pipes/file-size.pipe';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NavButtonComponent, NewContentComponent],
+  imports: [NavButtonComponent, NewContentComponent, FileSizePipe],
   template: `
     <nav>
       <app-nav-button
@@ -22,7 +23,7 @@ import { NewContentComponent } from '../new-content/new-content.component';
       }
     </nav>
     <hr />
-    <p>0 av 15 GB används</p>
+    <p>{{ fileService.usedStorageInBytes() | fileSizePipe }} av 15 GB används</p>
     <app-nav-button label="Få mer lagringsutrymme" variant="secondary" class="get-storage" />
   `,
   styleUrl: './sidebar.component.scss',
