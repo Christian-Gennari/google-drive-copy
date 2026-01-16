@@ -39,15 +39,6 @@ export class FileHandlingService {
     });
   }
 
-  convertBase64ToFile(base64: string, fileName: string): File {
-    // Decode base64 string to get the original binary data
-    const binaryString = atob(base64);
-    // Convert each character to its byte value (0-255)
-    const bytes = Uint8Array.from(binaryString, (char) => char.charCodeAt(0));
-    // Create a File object from the byte data
-    return new File([bytes], fileName);
-  }
-
   // Converts from File to FileDto format
   async convertToFileDto(file: File): Promise<FileDto> {
     const base64 = await this.convertFileToBase64(file);
