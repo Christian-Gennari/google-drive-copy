@@ -1,4 +1,5 @@
 import { Directive, HostListener, signal, output } from '@angular/core';
+import { DragOverlayComponent } from '../components/drag-overlay/drag-overlay.component';
 
 @Directive({
   selector: '[appDragAndDrop]',

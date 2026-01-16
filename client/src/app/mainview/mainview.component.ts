@@ -7,7 +7,7 @@ import { DragAndDropDirective } from '../directives/drag-and-drop.directive';
   selector: 'app-mainview',
   imports: [FilerowComponent, DragAndDropDirective],
   template: `
-    <div class="mainview" appDragAndDrop (fileDropped)="onFileDropped($event)" >
+    <div class="mainview" appDragAndDrop (fileDropped)="onFileDropped($event)" ()="" ) >
         @if (FileService.filesList().length > 0) {
           <div class="file-list-header">
             <span class="header-name">Namn</span>
@@ -44,6 +44,7 @@ export class MainviewComponent {
   fileReceived = input<File>();
 
   onFileDropped(fileReceived : File) : void {
+    // stäng modal
     this.FileService.uploadFile(fileReceived);
   }
 
