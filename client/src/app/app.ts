@@ -5,7 +5,6 @@ import { HeaderComponent } from './header/header.component';
 import { AsideComponent } from './aside/aside.component';
 import { FileHandlingService } from './services/file-handling.service';
 import { MainviewComponent } from './mainview/mainview.component';
-import { NewContentComponent } from './new-content/new-content.component';
 
 @Component({
   selector: 'app-root',
@@ -15,12 +14,11 @@ import { NewContentComponent } from './new-content/new-content.component';
     HeaderComponent,
     AsideComponent,
     MainviewComponent,
-    NewContentComponent,
   ],
   template: `
     <div class="app-layout">
       <app-header></app-header>
-      <app-sidebar> <app-new-content></app-new-content> </app-sidebar>
+      <app-sidebar></app-sidebar>
 
       <main class="main">
         <app-mainview></app-mainview>

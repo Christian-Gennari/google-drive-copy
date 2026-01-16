@@ -2,14 +2,13 @@
 import { Component, ChangeDetectionStrategy, inject, signal, computed, ViewChild } from '@angular/core';
 import { NavButtonComponent } from '../components/nav-button/nav-button.component';
 import { FileHandlingService } from '../services/file-handling.service';
-import { NewContentComponent } from '../new-content/new-content.component';
 import { FileSizePipe } from '../pipes/file-size.pipe';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NavButtonComponent, NewContentComponent, FileSizePipe, PortalModule],
+  imports: [NavButtonComponent, FileSizePipe, PortalModule],
   template: `
     <nav>
       <app-nav-button
@@ -17,7 +16,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
         icon="plus"
         variant="primary"
         class="new-button"
-        (click)="openNewContentDropdown()"
+        (click)="addNewFile()"
       />
       @for (item of navItems; track item.label) {
         <app-nav-button [label]="item.label" [icon]="item.icon" [class]="item.class"/>
@@ -28,19 +27,13 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
     </div>
     <p>{{ fileService.usedStorageInBytes() | fileSizePipe }} av 15 GB används</p>
     <app-nav-button label="Få mer lagringsutrymme" variant="secondary" class="get-storage"/>
-
-    <ng-template cdkPortal #newContentPortal>
-      <app-new-content class="new-content-overlay"></app-new-content>
-    </ng-template>
   `,
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  @ViewChild(CdkPortal) portal!: CdkPortal;
   fileService = inject(FileHandlingService);
-  private overlayRef: OverlayRef | null = null;
-
+  
   storagePercentage = computed(() => {
     const maxStorageInBytes = 15 * 1024 * 1024 * 1024;
     const usedBytes = this.fileService.usedStorageInBytes();
@@ -48,38 +41,26 @@ export class SidebarComponent {
   });
   constructor(private overlay: Overlay) {}
 
-  openNewContentDropdown() {
-    if (!this.portal) {
-      return;
-    }
+  addNewFile() {
+    const input = document.createElement('input'); // This createElement use is approved by Oscar!
+      input.type = 'file';
+      input.style.display = 'none';
 
-    const origin = document.querySelector('.new-button') as HTMLElement | null;
-    if (!origin) {
-      return;
-    }
-
-    if (this.overlayRef) {
-      this.overlayRef.dispose();
-    }
-
-    const positionStrategy = this.overlay.position()
-      .flexibleConnectedTo(origin)
-      .withPositions([
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top'
+      input.addEventListener('change', (e) => {
+        const target = e.target as HTMLInputElement;
+        if (!target.files || target.files.length === 0) {
+          alert('Fil kunde inte laddas upp');
+          return;
         }
-      ]);
 
-    this.overlayRef = this.overlay.create({
-      height: 200,
-      width: 200,
-      panelClass: 'new-content-overlay',
-      positionStrategy
-    });
-    this.overlayRef.attach(this.portal);
+        const fileToReturn: File = target.files[0];
+        this.fileService.onFileSelected(fileToReturn);
+        document.body.removeChild(input);
+
+      });
+
+      document.body.appendChild(input);
+      input.click();
   }
 
   protected readonly navItems = [
