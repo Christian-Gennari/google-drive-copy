@@ -6,5 +6,4 @@ export interface FileDto {
   uploadedAt?: string; // String not Date because JSON converts Dates to strings anyways
   editedAt?: string; //  First value is derived by uploadedAt
   sizeInBytes?: number; // Size of the file
-  fileBody?: string; // Base64 encoded file content
 }
