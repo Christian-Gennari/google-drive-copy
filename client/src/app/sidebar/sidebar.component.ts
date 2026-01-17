@@ -2,12 +2,11 @@ import { Component, ChangeDetectionStrategy, inject, computed } from '@angular/c
 import { NavButtonComponent } from '../components/nav-button/nav-button.component';
 import { FileHandlingService } from '../services/file-handling.service';
 import { FileSizePipe } from '../pipes/file-size.pipe';
-import { PortalModule } from '@angular/cdk/portal';
-import { Overlay } from '@angular/cdk/overlay';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NavButtonComponent, FileSizePipe, PortalModule],
+  imports: [NavButtonComponent, FileSizePipe],
   template: `
     <nav>
       <app-nav-button
@@ -32,13 +31,13 @@ import { Overlay } from '@angular/cdk/overlay';
 })
 export class SidebarComponent {
   fileService = inject(FileHandlingService);
+  toastService = inject(ToastService);
 
   storagePercentage = computed(() => {
     const maxStorageInBytes = 15 * 1024 * 1024 * 1024;
     const usedBytes = this.fileService.usedStorageInBytes();
     return Math.min((usedBytes / maxStorageInBytes) * 100, 100);
   });
-  constructor(private overlay: Overlay) {}
 
   addNewFile() {
     const input = document.createElement('input');
@@ -48,7 +47,7 @@ export class SidebarComponent {
     input.addEventListener('change', (e) => {
       const target = e.target as HTMLInputElement;
       if (!target.files || target.files.length === 0) {
-        alert('Fil kunde inte laddas upp');
+        this.toastService.show('Ingen fil valdes.', 'error');
         return;
       }
 
