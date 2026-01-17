@@ -1,10 +1,9 @@
-// TypeScript
-import { Component, ChangeDetectionStrategy, inject, signal, computed, ViewChild } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, computed } from '@angular/core';
 import { NavButtonComponent } from '../components/nav-button/nav-button.component';
 import { FileHandlingService } from '../services/file-handling.service';
 import { FileSizePipe } from '../pipes/file-size.pipe';
-import { CdkPortal, PortalModule } from '@angular/cdk/portal';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
+import { Overlay } from '@angular/cdk/overlay';
 
 @Component({
   selector: 'app-sidebar',
@@ -19,21 +18,21 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
         (click)="addNewFile()"
       />
       @for (item of navItems; track item.label) {
-        <app-nav-button [label]="item.label" [icon]="item.icon" [class]="item.class"/>
+        <app-nav-button [label]="item.label" [icon]="item.icon" [class]="item.class" />
       }
     </nav>
     <div class="storage-bar">
       <div class="storage-fill" [style.width.%]="storagePercentage()"></div>
     </div>
     <p>{{ fileService.usedStorageInBytes() | fileSizePipe }} av 15 GB används</p>
-    <app-nav-button label="Få mer lagringsutrymme" variant="secondary" class="get-storage"/>
+    <app-nav-button label="Få mer lagringsutrymme" variant="secondary" class="get-storage" />
   `,
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
   fileService = inject(FileHandlingService);
-  
+
   storagePercentage = computed(() => {
     const maxStorageInBytes = 15 * 1024 * 1024 * 1024;
     const usedBytes = this.fileService.usedStorageInBytes();
@@ -42,25 +41,24 @@ export class SidebarComponent {
   constructor(private overlay: Overlay) {}
 
   addNewFile() {
-    const input = document.createElement('input'); // This createElement use is approved by Oscar!
-      input.type = 'file';
-      input.style.display = 'none';
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.style.display = 'none';
 
-      input.addEventListener('change', (e) => {
-        const target = e.target as HTMLInputElement;
-        if (!target.files || target.files.length === 0) {
-          alert('Fil kunde inte laddas upp');
-          return;
-        }
+    input.addEventListener('change', (e) => {
+      const target = e.target as HTMLInputElement;
+      if (!target.files || target.files.length === 0) {
+        alert('Fil kunde inte laddas upp');
+        return;
+      }
 
-        const fileToReturn: File = target.files[0];
-        this.fileService.onFileSelected(fileToReturn);
-        document.body.removeChild(input);
+      const fileToReturn: File = target.files[0];
+      this.fileService.uploadFile(fileToReturn);
+      document.body.removeChild(input);
+    });
 
-      });
-
-      document.body.appendChild(input);
-      input.click();
+    document.body.appendChild(input);
+    input.click();
   }
 
   protected readonly navItems = [
