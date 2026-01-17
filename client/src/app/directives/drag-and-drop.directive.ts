@@ -1,60 +1,62 @@
-import { Directive, EventEmitter, HostListener, Output, ElementRef, inject } from '@angular/core';
+import { Directive, HostListener, output } from '@angular/core';
 
 @Directive({
   selector: '[appDragAndDrop]',
+  standalone: true,
 })
 export class DragAndDropDirective {
-  @Output() fileDropped = new EventEmitter<File>();
-  @Output() dragOver = new EventEmitter<void>();
-  @Output() dragLeave = new EventEmitter<void>();
 
-  private elementRef = inject(ElementRef);
-  private isDragging = false;
+  fileDropped = output<File>();
+  dragEnter = output<void>();
+  dragLeave = output<void>();
 
-  @HostListener('document:dragenter', ['$event'])
-  onDocumentDragEnter(event: DragEvent): void {
+  // Counter to handle child-element flickering issues
+  private dragCounter = 0;
+
+  @HostListener('window:dragenter', ['$event'])
+  onWindowDragEnter(event: DragEvent): void {
     event.preventDefault();
-    const isOverHost = this.elementRef.nativeElement.contains(event.target as Node);
-    const isOverOverlay = (event.target as HTMLElement)?.closest('.cdk-overlay-container');
+    event.stopPropagation();
 
-    if ((isOverHost || isOverOverlay) && !this.isDragging) {
-      this.isDragging = true;
-      this.dragOver.emit();
+    this.dragCounter++;
+
+    // Emit only when we first enter the window context
+    if (this.dragCounter === 1) {
+      this.dragEnter.emit();
     }
   }
 
-  @HostListener('document:dragover', ['$event'])
-  onDocumentDragOver(event: DragEvent): void {
+  @HostListener('window:dragleave', ['$event'])
+  onWindowDragLeave(event: DragEvent): void {
     event.preventDefault();
-  }
+    event.stopPropagation();
 
-  @HostListener('document:dragleave', ['$event'])
-  onDocumentDragLeave(event: DragEvent): void {
-    event.preventDefault();
-    const relatedTarget = event.relatedTarget as Node | null;
-    const isLeavingToHost = relatedTarget && this.elementRef.nativeElement.contains(relatedTarget);
-    const isLeavingToOverlay = relatedTarget && (relatedTarget as HTMLElement)?.closest?.('.cdk-overlay-container');
+    this.dragCounter--;
 
-    if (!relatedTarget || (!isLeavingToHost && !isLeavingToOverlay)) {
-      if (this.isDragging) {
-        this.isDragging = false;
-        this.dragLeave.emit();
-      }
+    // Emit only when we have truly left the window
+    if (this.dragCounter === 0) {
+      this.dragLeave.emit();
     }
   }
 
-  @HostListener('document:drop', ['$event'])
-  onDocumentDrop(event: DragEvent): void {
+  @HostListener('window:dragover', ['$event'])
+  onWindowDragOver(event: DragEvent): void {
     event.preventDefault();
-    const isOverHost = this.elementRef.nativeElement.contains(event.target as Node);
-    const isOverOverlay = (event.target as HTMLElement)?.closest('.cdk-overlay-container');
+    event.stopPropagation();
+  }
 
-    if (isOverHost || isOverOverlay) {
-      this.isDragging = false;
-      const files = event.dataTransfer?.files;
-      if (files && files.length > 0) {
-        this.fileDropped.emit(files[0]);
-      }
+  @HostListener('window:drop', ['$event'])
+  onWindowDrop(event: DragEvent): void {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Reset
+    this.dragCounter = 0;
+    this.dragLeave.emit();
+
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.fileDropped.emit(files[0]);
     }
   }
 }
