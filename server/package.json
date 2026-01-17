@@ -17,10 +17,13 @@
   "license": "ISC",
   "dependencies": {
     "express": "^5.2.1",
-    "fuzzysort": "^3.1.0"
+    "fuzzysort": "^3.1.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
+    "@types/multer": "^2.0.0",
     "@types/node": "^25.0.3",
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.11",
