@@ -8,8 +8,10 @@ import { ToastService } from '../../services/toast.service';
   template: `
     @if (toastService.toast(); as msg) {
       <div class="toast" [ngClass]="msg.type">
-        <span class="icon">{{ msg.type === 'success' ? '✅' : '⚠️' }}</span>
-        <span>{{ msg.text }}</span>
+        <div class="icon-circle">
+          <span>{{ msg.type === 'success' ? '✓' : '!' }}</span>
+        </div>
+        <span class="message">{{ msg.text }}</span>
       </div>
     }
   `,
@@ -20,26 +22,56 @@ import { ToastService } from '../../services/toast.service';
         bottom: 2rem;
         left: 50%;
         transform: translateX(-50%);
-        padding: 1rem 1.5rem;
-        border-radius: 8px;
+
         display: flex;
         align-items: center;
-        gap: 0.75rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        gap: 12px;
+
+        // Dark Theme Colors
+        background: #1e1e1e; // Dark grey surface
+        color: #e3e3e3; // Off-white text
+        border: 1px solid #333;
+
+        padding: 12px 20px;
+        border-radius: 50px; // Pill shape is very modern
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
         z-index: 9999;
-        animation: slideUp 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
         font-weight: 500;
+
+        animation: slideUp 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
+
+      // Icon Container styles
+      .icon-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      // SUCCESS VARIANT
       .toast.success {
-        background: #e6f4ea;
-        color: #1e8e3e;
-        border: 1px solid #ceead6;
+        .icon-circle {
+          background: #81c995; // Soft Green
+          color: #0d3d20; // Dark Green text inside circle
+        }
       }
+
+      // ERROR VARIANT
       .toast.error {
-        background: #fce8e6;
-        color: #d93025;
-        border: 1px solid #fad2cf;
+        .icon-circle {
+          background: #f28b82; // Soft Red
+          color: #4a0d09; // Dark Red text inside circle
+        }
       }
+
       @keyframes slideUp {
         from {
           transform: translate(-50%, 100%);
