@@ -27,24 +27,24 @@ import { ToastService } from '../../services/toast.service';
         align-items: center;
         gap: 12px;
 
-        // Dark Theme Colors
-        background: #1e1e1e; // Dark grey surface
-        color: #e3e3e3; // Off-white text
-        border: 1px solid #333;
-
         padding: 12px 20px;
-        border-radius: 50px; // Pill shape is very modern
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        border-radius: 50px;
         z-index: 9999;
 
-        font-family: 'Roboto', sans-serif;
+        font-family: 'NunitoSans', sans-serif; /* Use global font */
         font-size: 14px;
-        font-weight: 500;
+        font-weight: 600;
 
         animation: slideUp 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        /* --- USE GLOBAL VARIABLES --- */
+        /* These automatically switch based on your styles.scss */
+        background: var(--color-panels-bg);
+        color: var(--color-text);
+        border: 1px solid var(--color-border-subtle);
+        box-shadow: var(--shadow-elev-1);
       }
 
-      // Icon Container styles
       .icon-circle {
         display: flex;
         align-items: center;
@@ -53,23 +53,21 @@ import { ToastService } from '../../services/toast.service';
         height: 24px;
         border-radius: 50%;
         font-size: 14px;
-        font-weight: bold;
+        font-weight: 800;
       }
 
-      // SUCCESS VARIANT
-      .toast.success {
-        .icon-circle {
-          background: #81c995; // Soft Green
-          color: #0d3d20; // Dark Green text inside circle
-        }
+      /* --- SEMANTIC COLORS (Success/Error) --- */
+      /* Since global vars don't have success/error, we keep these manual */
+      /* They look good on both Light (#f8f8f8) and Dark (#1b1b1b) backgrounds */
+
+      .toast.success .icon-circle {
+        background: #81c995; /* Soft Green */
+        color: #0d3d20; /* Dark Green Text */
       }
 
-      // ERROR VARIANT
-      .toast.error {
-        .icon-circle {
-          background: #f28b82; // Soft Red
-          color: #4a0d09; // Dark Red text inside circle
-        }
+      .toast.error .icon-circle {
+        background: #f28b82; /* Soft Red */
+        color: #4a0d09; /* Dark Red Text */
       }
 
       @keyframes slideUp {
