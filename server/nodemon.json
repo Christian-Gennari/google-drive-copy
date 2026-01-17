@@ -2,5 +2,5 @@
   "watch": ["src", "../shared"],
   "ext": "ts,json",
   "ignore": ["uploads/*", "db.json"],
-  "exec": "node --loader ts-node/esm src/index.ts"
+  "exec": "tsx src/index.ts"
 }

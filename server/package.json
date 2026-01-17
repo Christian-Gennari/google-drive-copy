@@ -19,7 +19,8 @@
     "express": "^5.2.1",
     "fuzzysort": "^3.1.0",
     "helmet": "^8.1.0",
-    "multer": "^2.0.2"
+    "multer": "^2.0.2",
+    "zod": "^4.3.5"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
@@ -28,6 +29,7 @@
     "cross-env": "^7.0.3",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
 }
