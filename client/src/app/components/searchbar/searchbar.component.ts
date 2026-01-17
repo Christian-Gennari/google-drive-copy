@@ -4,6 +4,7 @@ import { FileHandlingService } from '../../services/file-handling.service';
 
 @Component({
   selector: 'app-searchbar',
+  standalone: true,
   imports: [IconsComponent],
   template: `
     <div class="searchbar">
@@ -15,17 +16,16 @@ import { FileHandlingService } from '../../services/file-handling.service';
         type="search"
         placeholder="Sök på Drive"
         aria-label="Search"
-        (input)="onSearch($event.target.value)"
+        (input)="onSearch($any($event).target.value)"
       />
     </div>
   `,
   styleUrl: './searchbar.component.scss',
 })
 export class SearchbarComponent {
-  FileService = inject(FileHandlingService);
+  private fileService = inject(FileHandlingService);
 
   onSearch(value: string) {
-    this.FileService.searchAllFiles(value);
+    this.fileService.searchAllFiles(value);
   }
-
 }
