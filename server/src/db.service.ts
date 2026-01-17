@@ -48,7 +48,6 @@ export class DbService {
         uploadedAt: files[existingFileIndex].uploadedAt,
         editedAt: fileData.editedAt,
         sizeInBytes: fileData.sizeInBytes,
-        fileBody: fileData.fileBody,
       };
     } else {
       files.push(fileData);
