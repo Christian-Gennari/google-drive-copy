@@ -1,9 +1,12 @@
-# 📂 Google Drive Clone
+# 🦆 Duck Drive (Google Drive Clone)
+
+[![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
+[![Node.js](https://img.shields.io/badge/Node.js-LTS-339933?style=flat&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Express.js](https://img.shields.io/badge/Express.js-5.2-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
+[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
 A modern file management system designed to replicate core Google Drive functionalities. This application features a seamless drag-and-drop interface, real-time file searching, and a custom lightweight backend for efficient file handling.
-
-> **Note:** This project is a full-stack implementation featuring an Angular frontend and a Node.js/Express backend.
-
 
 
 ## 📋 Table of Contents
@@ -17,7 +20,6 @@ A modern file management system designed to replicate core Google Drive function
 7. [📡 API Overview](#-api-overview)
 8. [License](#license)
 9. [Authors](#authors)
-
 
 
 
@@ -222,3 +224,4 @@ This project is licensed under the **ISC License**.
 **Christian Gennari**
 - LinkedIn: [linkedin.com/in/christiangennari](https://linkedin.com/in/christiangennari)
 - GitHub: [@Christian-Gennari](https://github.com/Christian-Gennari)
+
