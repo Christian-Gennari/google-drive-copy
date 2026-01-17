@@ -1,3 +1,10 @@
+// 1. Host needs relative position so the absolute centered spinner knows where to center
+:host {
+  display: block;
+  position: relative;
+  height: 100%;
+}
+
 .mainview {
   background: var(--color-main-bg);
   padding: 20px 24px;
@@ -5,6 +12,7 @@
   overflow-x: auto;
   border-radius: 1rem;
   height: 95%;
+  position: relative; // Ensure internal overlays respect this container
 
   .file-list-header {
     display: grid;
@@ -37,6 +45,7 @@
     gap: 2px;
   }
 
+  // --- EMPTY STATE ---
   .empty-state {
     display: flex;
     flex-direction: column;
@@ -62,7 +71,63 @@
   }
 }
 
-// Responsive adjustments
+// --- NEW LOADING SPINNER ---
+.spinner-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+
+  /* Circle background makes spinner visible on top of content */
+  background: var(--color-surface-1, #fff);
+  padding: 16px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  /* Use your primary color here, fallback to blue if variable missing */
+  border-left-color: var(--color-primary, #1a73e8);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// --- STATE CONTAINERS (Initial Load / Error) ---
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--color-text-muted);
+
+  &.error {
+    color: var(--color-danger, #d93025);
+  }
+}
+
+// --- UTILITIES ---
+.is-reloading {
+  opacity: 0.5;
+  pointer-events: none; /* Prevent clicks while reloading */
+  transition: opacity 0.3s ease-in-out;
+}
+
+// --- RESPONSIVE ADJUSTMENTS ---
 @media (max-width: 1024px) {
   :host {
     .mainview {
@@ -83,7 +148,6 @@
 @media (max-width: 870px) {
   :host {
     .mainview {
-
       padding: 16px 12px;
 
       .file-list-header {

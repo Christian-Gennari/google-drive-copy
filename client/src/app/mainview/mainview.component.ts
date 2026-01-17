@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy } from '@angular/core';
+import { Component, effect, inject, OnDestroy, signal } from '@angular/core';
 import { FilerowComponent } from '../components/filerow/filerow.component';
 import { FileHandlingService } from '../services/file-handling.service';
 import { DragAndDropDirective } from '../directives/drag-and-drop.directive';
@@ -14,33 +14,53 @@ import { DragOverlayComponent } from '../components/drag-overlay/drag-overlay.co
       class="mainview"
       appDragAndDrop
       (fileDropped)="onFileDropped($event)"
-      (dragOver)="onDragOver()"
+      (dragEnter)="onDragEnter()"
       (dragLeave)="onDragLeave()"
     >
-      @if (FileService.filesList().length > 0) {
-        <div class="file-list-header">
-          <span class="header-name">Namn</span>
-          <span class="header-owner">Ägare</span>
-          <span class="header-date" id="headerUploadedAt">Uppladdad</span>
-          <span class="header-date">Ändrad</span>
-          <span class="header-size">Storlek</span>
-          <span class="header-action"></span>
-        </div>
-        <div class="file-list">
-          @for (filerow of FileService.filesList(); track filerow.fileName) {
-            <app-filerow
-              [fileName]="filerow.fileName"
-              [ownerName]="filerow.ownerName"
-              [uploadedAt]="filerow.uploadedAt"
-              [editedAt]="filerow.editedAt"
-              [sizeInBytes]="filerow.sizeInBytes"
-            ></app-filerow>
-          }
-        </div>
-      } @else {
-        <div class="empty-state">
-          <img [src]="randomEmptyStateImage" alt="Inga filer" />
-          <p>Ooops... Inga filer att visa!</p>
+      @if (FileService.filesResource.value(); as files) {
+        @if (showSpinner()) {
+          <div class="spinner-overlay">
+            <div class="spinner"></div>
+          </div>
+        }
+
+        @if (files.length > 0) {
+          <div class="file-list-header">
+            <span class="header-name">Namn</span>
+            <span class="header-owner">Ägare</span>
+            <span class="header-date" id="headerUploadedAt">Uppladdad</span>
+            <span class="header-date">Ändrad</span>
+            <span class="header-size">Storlek</span>
+            <span class="header-action"></span>
+          </div>
+
+          <div class="file-list" [class.is-reloading]="FileService.filesResource.isLoading()">
+            @for (filerow of files; track filerow.fileName) {
+              <app-filerow
+                [fileName]="filerow.fileName"
+                [ownerName]="filerow.ownerName"
+                [uploadedAt]="filerow.uploadedAt"
+                [editedAt]="filerow.editedAt"
+                [sizeInBytes]="filerow.sizeInBytes"
+              ></app-filerow>
+            }
+          </div>
+        } @else {
+          <div class="empty-state">
+            <img [src]="randomEmptyStateImage" alt="Inga filer" />
+            <p>Ooops... Inga filer att visa!</p>
+          </div>
+        }
+      } @else if (FileService.filesResource.isLoading()) {
+        @if (showSpinner()) {
+          <div class="state-container">
+            <div class="spinner"></div>
+            <p style="margin-top: 1rem; color: var(--color-text-muted);">Laddar filer...</p>
+          </div>
+        }
+      } @else if (FileService.filesResource.error()) {
+        <div class="state-container error">
+          <p>⚠️ Kunde inte ladda filer. Är servern igång?</p>
         </div>
       }
     </div>
@@ -52,10 +72,37 @@ export class MainviewComponent implements OnDestroy {
   private overlay = inject(Overlay);
   private overlayRef: OverlayRef | null = null;
 
-  onDragOver(): void {
+  // UX: Track if the loading is taking "too long" (e.g. > 800ms)
+  showSpinner = signal(false);
+
+  constructor() {
+    // EFFECT: Debounce the spinner
+    effect((onCleanup) => {
+      // 1. Check if resource is currently loading
+      if (this.FileService.filesResource.isLoading()) {
+        // 2. Start a timer. If loading finishes before 800ms, this never fires.
+        const timer = setTimeout(() => {
+          this.showSpinner.set(true);
+        }, 800);
+
+        // 3. Cleanup runs if 'isLoading' changes (e.g. back to false)
+        onCleanup(() => {
+          clearTimeout(timer);
+          this.showSpinner.set(false); // Hide immediately when done
+        });
+      } else {
+        // Ensure it's hidden if not loading
+        this.showSpinner.set(false);
+      }
+    });
+  }
+
+  // --- Drag & Drop Logic ---
+  onDragEnter(): void {
     if (this.overlayRef) return;
 
-    const positionStrategy = this.overlay.position()
+    const positionStrategy = this.overlay
+      .position()
       .global()
       .centerHorizontally()
       .centerVertically();
@@ -97,7 +144,6 @@ export class MainviewComponent implements OnDestroy {
     'assets/empty-state-3.png',
   ];
 
-  randomEmptyStateImage = this.emptyStateImages[
-    Math.floor(Math.random() * this.emptyStateImages.length)
-    ];
+  randomEmptyStateImage =
+    this.emptyStateImages[Math.floor(Math.random() * this.emptyStateImages.length)];
 }
