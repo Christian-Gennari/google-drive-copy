@@ -6,7 +6,7 @@
 [![Express.js](https://img.shields.io/badge/Express.js-5.2-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 
-A modern file management system designed to replicate core Google Drive functionalities. This application features a seamless drag-and-drop interface, real-time file searching, and a custom lightweight backend for efficient file handling.
+A Proof of Concept file management system designed to replicate core Google Drive functionalities. This application features a seamless drag-and-drop interface, real-time file searching, and a custom lightweight backend for efficient file handling.
 
 
 ## 📋 Table of Contents
@@ -224,4 +224,5 @@ This project is licensed under the **ISC License**.
 **Christian Gennari**
 - LinkedIn: [linkedin.com/in/christiangennari](https://linkedin.com/in/christiangennari)
 - GitHub: [@Christian-Gennari](https://github.com/Christian-Gennari)
+
 
