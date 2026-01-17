@@ -5,10 +5,12 @@ import { DragAndDropDirective } from '../directives/drag-and-drop.directive';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DragOverlayComponent } from '../components/drag-overlay/drag-overlay.component';
+import { PreviewModalComponent } from '../components/preview-modal/preview-modal.component';
+import { FileDto } from '../../../../shared/file.dto'; // <-- Added this import
 
 @Component({
   selector: 'app-mainview',
-  imports: [FilerowComponent, DragAndDropDirective],
+  imports: [FilerowComponent, DragAndDropDirective, PreviewModalComponent],
   template: `
     <div
       class="mainview"
@@ -42,6 +44,7 @@ import { DragOverlayComponent } from '../components/drag-overlay/drag-overlay.co
                 [uploadedAt]="filerow.uploadedAt"
                 [editedAt]="filerow.editedAt"
                 [sizeInBytes]="filerow.sizeInBytes"
+                (preview)="openPreview(filerow)"
               ></app-filerow>
             }
           </div>
@@ -64,6 +67,10 @@ import { DragOverlayComponent } from '../components/drag-overlay/drag-overlay.co
         </div>
       }
     </div>
+
+    @if (selectedFile(); as file) {
+      <app-preview-modal [file]="file" (close)="selectedFile.set(null)"></app-preview-modal>
+    }
   `,
   styleUrls: ['./mainview.component.scss'],
 })
@@ -75,26 +82,30 @@ export class MainviewComponent implements OnDestroy {
   // UX: Track if the loading is taking "too long" (e.g. > 800ms)
   showSpinner = signal(false);
 
+  // PREVIEW STATE
+  selectedFile = signal<FileDto | null>(null);
+
   constructor() {
     // EFFECT: Debounce the spinner
     effect((onCleanup) => {
-      // 1. Check if resource is currently loading
       if (this.FileService.filesResource.isLoading()) {
-        // 2. Start a timer. If loading finishes before 800ms, this never fires.
         const timer = setTimeout(() => {
           this.showSpinner.set(true);
         }, 800);
 
-        // 3. Cleanup runs if 'isLoading' changes (e.g. back to false)
         onCleanup(() => {
           clearTimeout(timer);
-          this.showSpinner.set(false); // Hide immediately when done
+          this.showSpinner.set(false);
         });
       } else {
-        // Ensure it's hidden if not loading
         this.showSpinner.set(false);
       }
     });
+  }
+
+  // PREVIEW METHOD
+  openPreview(file: FileDto) {
+    this.selectedFile.set(file);
   }
 
   // --- Drag & Drop Logic ---
