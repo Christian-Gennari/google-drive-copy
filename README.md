@@ -1,211 +1,126 @@
 # 🦆 Duck Drive (Google Drive Clone)
 
-[![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat&logo=angular&logoColor=white)](https://angular.io/)
-[![Node.js](https://img.shields.io/badge/Node.js-LTS-339933?style=flat&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Express.js](https://img.shields.io/badge/Express.js-5.2-000000?style=flat&logo=express&logoColor=white)](https://expressjs.com/)
-[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
-
-A Proof of Concept file management system designed to replicate core Google Drive functionalities. This application features a seamless drag-and-drop interface, real-time file searching, and a custom lightweight backend for efficient file handling.
-
+A proof of concept file management system designed to replicate core Google Drive functionality. The application features drag and drop uploads, real time fuzzy search, and a custom lightweight backend.
 
 ## 📋 Table of Contents
 
-1. [Features Overview](#features-overview)
-2. [Technology Stack](#technology-stack)
-3. [UI/UX Features](#uiux-features)
-4. [Technical Highlights](#technical-highlights)
-5. [Getting Started](#getting-started)
-6. [Project Structure](#project-structure)
-7. [📡 API Overview](#-api-overview)
-8. [License](#license)
-9. [Authors](#authors)
+* [Technology Stack](#technology-stack)
+* [Key Features](#key-features)
+* [Technical Highlights](#technical-highlights)
+* [Getting Started](#getting-started)
+* [Project Structure](#project-structure)
+* [API Overview](#api-overview)
+* [License](#license)
+* [Authors](#authors)
 
-
-
-## Features Overview
-
-### 📁 File Management
-
-* **Upload System**: Support for single file uploads with metadata handling (Owner Name, Size, Date).
-* **Download**: Secure file retrieval and download capabilities via dedicated API endpoints.
-* **Deletion**: Permanent removal of files from both the disk and the database.
-* **Metadata Tracking**: Automatic tracking of file size, upload timestamps, and edit timestamps.
-
-### 🔍 Search & Discovery
-
-* **Fuzzy Search**: integrated `fuzzysort` algorithm allows users to find files even with partial or slightly misspelled queries.
-* **Real-time Results**: Instant search feedback as the user types.
-
-### ⚙️ Backend Administration
-
-* **JSON Database**: A custom, lightweight file-based database implementation (`db.json`) for zero-configuration persistence.
-* **Validation**: Robust request validation using `Zod` to ensure data integrity before processing.
-* **Security**: Implementation of `helmet` for setting various HTTP headers to secure the application.
 
 
 ## Technology Stack
 
-### Frontend (Client)
-
-* **Framework**: Angular v21
-* **Language**: TypeScript ~5.9
-* **Styling**: SCSS (Sass) for modular component styling
-
-### Backend (Server)
-
-* **Runtime**: Node.js
-* **Framework**: Express.js
-* **Language**: TypeScript
-* **Validation**: Zod
-* **Search**: Fuzzysort
-* **File Handling**: Multer
+| Frontend                        | Backend                        | Shared                 |
+| ------------------------------- | ------------------------------ | ---------------------- |
+| **Framework:** Angular v21      | **Runtime:** Node.js           | **Validation:** Zod    |
+| **Language:** TypeScript 5.9    | **Framework:** Express.js      | **Types:** Shared DTOs |
+| **Styling:** SCSS    | **Search:** Fuzzysort          |                        |
+| **State:** Services and Signals | **Middleware:** Multer, Helmet |                        |
 
 
 
-## UI/UX Features
+## Key Features
 
-* **Drag & Drop Interface**: Intuitive file uploading using a custom directive (`appDragAndDrop`) that handles drag events and file drops seamlessly.
-* **Toast Notifications**: integrated feedback system to alert users of successful uploads or errors.
-* **Responsive Layout**: Flexible sidebar, header, and main view components designed to adapt to different screen sizes.
-* **Modern Design**: Clean aesthetic inspired by Google Drive, utilizing custom icons and layouts.
+### File Management
+
+* **Smart Upload:** Single file uploads via drag and drop with automatic metadata tracking such as owner, size, and timestamps.
+* **Secure Retrieval:** Dedicated API endpoints for secure file downloads and permanent deletion.
+* **Fuzzy Search:** Integrated `fuzzysort` for real time, error tolerant file discovery.
+
+### UI and UX
+
+* **Modern Interface:** Clean layout inspired by Google Drive with a responsive sidebar and header.
+* **Interactive Feedback:** Toast notification system for success and error states.
+* **Modular Layout:** Flexible components that adapt to different screen sizes.
+
 
 
 ## Technical Highlights
 
-* **Custom DB Service**: The backend utilizes a `DbService` class that abstracts file I/O operations, making the JSON-based database act like a persistent store with `getAllFiles`, `upsertFile`, and `delete` methods.
-* **Robust Error Handling**: The API includes comprehensive error checks for invalid filenames, missing files, and validation failures, returning appropriate HTTP 400/404/500 status codes.
-* **Modular Architecture**: The Angular frontend is strictly typed and organized into feature-specific components (`sidebar`, `mainview`, `header`) and shared services (`file-api`, `file-handling`).
-* **Type Safety**: Shared Data Transfer Objects (DTOs) like `FileDto` ensure consistency between the client and server data structures.
+* **Custom DB Service:** A `DbService` class abstracts file I/O and allows a `db.json` file to function as a persistent, zero configuration document store.
+* **Type Safety:** Shared Data Transfer Objects ensure strict type synchronization between the Angular client and the Express server.
+* **Security:** Uses Helmet for HTTP header protection and Zod for schema validation on all incoming requests.
+* **Modular Architecture:** Feature specific components such as `mainview` and `sidebar`, paired with logic isolated services.
+
 
 
 ## Getting Started
 
 ### Prerequisites
 
-* **Node.js** (Latest LTS recommended)
-* **npm** (Node Package Manager)
+* Node.js (latest LTS)
+* npm
 
-### Installation
+### Installation and Setup
 
 1. **Clone the repository**
-```bash
-git clone https://github.com/your-username/google-drive-clone.git
-cd google-drive-clone
 
+```bash
+git clone https://github.com/Christian-Gennari/google-drive-clone.git
+cd google-drive-clone
 ```
 
+2. **Install dependencies**
 
-2. **Install Client Dependencies**
 ```bash
+# Client
 cd client
 npm install
 
-```
-
-
-3. **Install Server Dependencies**
-```bash
+# Server
 cd ../server
 npm install
-
 ```
 
+### Running the App
+
+**Development mode**
+
+* Start server: `cd server && npm run dev` (port 4000)
+* Start client: `cd client && ng serve` (port 4200)
+
+**Production mode**
+
+* Run `npm start` inside the `server` directory. This builds the frontend and serves it through the backend on port 4000.
 
 
-### Running the Application (Development Mode)
-
-**1. Start the Backend Server**
-The server will start on the configured port (default is 4000) and create an `uploads/` directory if it doesn't exist.
-
-```bash
-cd server
-npm run dev
-
-```
-
-**2. Start the Frontend Client**
-The Angular development server will start, typically on port 4200.
-
-```bash
-cd client
-ng serve
-
-```
-
-**3. Access the App**
-Open your browser and navigate to: `http://localhost:4200/`
-
-### Running the Application (Production Mode)
-The application is setup to automatically build and serve the frontend through the backend,
-simply writing npm start will do all the steps automatically and ultimately start it on `http://localhost:4000/`.
-
-```bash
-cd server
-npm start
-
-```
 
 ## Project Structure
 
 ```text
 google-drive-clone/
-├── client/                 # Angular Frontend
+├── client/                 # Angular frontend
+│   ├── src/app/
+│   │   ├── components/     # UI components: Toasts, Icons
+│   │   ├── directives/     # Drag and drop logic
+│   │   └── mainview/       # Primary file grid
+├── server/                 # Node.js backend
 │   ├── src/
-│   │   ├── app/
-│   │   │   ├── components/ # Reusable UI components (Toast, Icons, etc.)
-│   │   │   ├── directives/ # Custom directives (Drag & Drop)
-│   │   │   ├── services/   # API and State management
-│   │   │   ├── aside/      # Secondary sidebar view
-│   │   │   ├── header/     # App navigation header
-│   │   │   ├── mainview/   # Primary file grid view
-│   │   │   └── sidebar/    # Primary navigation sidebar
-│   │   └── assets/         # Static images and fonts
-│   └── package.json
-│
-├── server/                 # Node.js/Express Backend
-│   ├── src/
-│   │   ├── index.ts        # Entry point
-│   │   ├── file.routes.ts  # API Route definitions
-│   │   ├── db.service.ts   # JSON Database adapter
-│   │   └── config.ts       # Configuration constants
-│   ├── uploads/            # Directory for stored files
-│   ├── db.json             # Persistent data storage
-│   └── package.json
-│
-└── shared/                 # Shared Types
-    └── file.dto.ts         # TypeScript interfaces shared by both apps
-
+│   │   ├── db.service.ts   # JSON database adapter
+│   │   └── file.routes.ts  # API endpoints
+│   ├── uploads/            # Local file storage
+│   └── db.json             # Persistence store
+└── shared/                 # Shared TypeScript DTOs
 ```
 
 
 
-## 📡 API Overview
+## API Overview
 
-The backend exposes a RESTful API for file operations.
-
-### Files
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| **GET** | `/api/files` | Retrieve a list of all files. |
-| **GET** | `/api/files/:filename` | Download a specific file. |
-| **POST** | `/api/files` | Upload a new file (Multipart/Form-Data). Requires `ownerName`. |
-| **DELETE** | `/api/files/:filename` | Delete a specific file. |
-
-### Search
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| **GET** | `/api/search?q=query` | Fuzzy search files by name. |
-
-### System
-
-| Method | Endpoint | Description |
-| --- | --- | --- |
-| **GET** | `/api/health` | Check API status and environment mode. |
-
-
+| Method     | Endpoint           | Description               |
+| ---------- | ------------------ | ------------------------- |
+| **GET**    | `/api/files`       | List all files            |
+| **GET**    | `/api/files/:name` | Download a specific file  |
+| **POST**   | `/api/files`       | Upload a file (multipart) |
+| **DELETE** | `/api/files/:name` | Delete a file             |
+| **GET**    | `/api/search?q=`   | Fuzzy search by name      |
 
 ## License
 
@@ -224,5 +139,3 @@ This project is licensed under the **ISC License**.
 **Christian Gennari**
 - LinkedIn: [linkedin.com/in/christiangennari](https://linkedin.com/in/christiangennari)
 - GitHub: [@Christian-Gennari](https://github.com/Christian-Gennari)
-
-
