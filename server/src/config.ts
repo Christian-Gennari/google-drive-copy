@@ -5,7 +5,7 @@ const SERVER_ROOT = process.cwd();
 
 export const CONFIG = {
   // The port the server should listen on
-  port: 4000,
+  port: process.env.PORT ? parseInt(process.env.PORT) : 4000,
 
   // File paths
   paths: {
