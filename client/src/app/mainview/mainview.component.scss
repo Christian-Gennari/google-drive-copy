@@ -16,7 +16,7 @@
 
   .file-list-header {
     display: grid;
-    grid-template-columns: 1fr 9rem 8rem 8rem 5rem 48px 48px;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 48px 48px;
     gap: 16px;
     align-items: center;
     padding: 8px 16px;
@@ -148,7 +148,7 @@
 @media (max-width: 870px) {
   :host {
     .mainview {
-      padding: 16px 12px;
+      padding: 0.5rem 0.5rem;
 
       .file-list-header {
         grid-template-columns: 1fr;

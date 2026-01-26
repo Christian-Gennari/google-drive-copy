@@ -7,6 +7,7 @@
     'sidebar main aside';
   height: 100dvh;
   width: 100dvw;
+  overflow: hidden;
   background-color: var(--color-panels-bg);
 }
 
@@ -20,8 +21,15 @@
 
 @media (max-width: 768px) {
   .app-layout {
-    grid-template-columns: 1fr 2fr;
-    gap: 0.5rem;
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'header header'
+      'sidebar main';
+    gap: 0;
+  }
+  .main{
+    padding: 0.5rem;
   }
 }
 
