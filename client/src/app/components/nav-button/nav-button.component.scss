@@ -94,12 +94,25 @@
 }
 
 @media (max-width: 768px) {
-    :host {
-      button {
-        padding: 0.5rem;
-      }
-      .google-apps {
+  :host {
+    button {
+      padding: 0.75rem;
+      justify-content: center;
+
+      .label {
         display: none;
       }
     }
+  }
+
+  :host([data-variant='primary']) {
+    button {
+      margin: 10px 0;
+      padding: 0.75rem;
+    }
+  }
+
+  :host([data-variant='secondary']) {
+    display: none;
+  }
 }

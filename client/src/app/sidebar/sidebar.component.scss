@@ -32,13 +32,23 @@ p {
 }
 
 
+.get-storage {
+  display: block;
+}
+
 // Responsive adjustments
 @media (max-width: 1024px) {
 
 }
 
 @media (max-width: 768px) {
-  :host{
-    padding-left: 1rem;
+  :host {
+    padding: 0.5rem;
+  }
+
+  .storage-bar,
+  p,
+  .get-storage {
+    display: none;
   }
 }

@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { SearchbarComponent } from '../components/searchbar/searchbar.component';
 import { NavButtonComponent } from '../components/nav-button/nav-button.component';
+import {toSignal} from '@angular/core/rxjs-interop';
+import {fromEvent, map, startWith} from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -14,7 +17,7 @@ import { NavButtonComponent } from '../components/nav-button/nav-button.componen
       <app-searchbar class="header-search"></app-searchbar>
       <div class="header-icons">
         <nav>
-          @for (item of headerItems; track item.label) {
+          @for (item of filteredHeaderItems(); track item.label) {
           <app-nav-button [icon]="item.icon" [class]="item.class" [showLabelText]="false" />
           }
         </nav>
@@ -24,10 +27,27 @@ import { NavButtonComponent } from '../components/nav-button/nav-button.componen
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  private isMobile = toSignal(
+    fromEvent(window, 'resize').pipe(
+      startWith(null),
+      map(() => window.innerWidth <= 768)
+    ),
+    { initialValue: window.innerWidth <= 768 }
+  );
+
   protected readonly headerItems = [
     { label: 'Support', class: 'support', icon: 'support' },
     { label: 'Inställningar', class: 'settings', icon: 'settings' },
     { label: 'Googles appar', class: 'google-apps', icon: 'apps' },
     { label: 'Google konto', class: 'google-account', icon: 'account' },
   ];
+
+  protected filteredHeaderItems = computed(() => {
+    if (this.isMobile()) {
+      return this.headerItems.filter(
+        item => item.class !== 'support' && item.class !== 'google-apps'
+      );
+    }
+    return this.headerItems;
+  });
 }

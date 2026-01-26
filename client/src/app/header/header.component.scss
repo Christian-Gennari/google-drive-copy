@@ -74,13 +74,12 @@
     display: grid;
     grid-template-columns: 1fr;
     min-width: 430px;
-
     header {
       gap: 0.5rem;
 
       .brand {
-        flex: auto;
         width: auto;
+        flex: 0 0 auto;
       }
     }
   }
